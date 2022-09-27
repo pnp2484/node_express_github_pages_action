@@ -1,0 +1,1 @@
+(()=>{var o,r={736:o=>{o.exports=(o,r)=>o+r}},e={};o=function o(t){var l=e[t];if(void 0!==l)return l.exports;var s=e[t]={exports:{}};return r[t](s,s.exports,o),s.exports}(736),console.log("Hello, World"),console.log(`Add: ${o(10,20)}`)})();
