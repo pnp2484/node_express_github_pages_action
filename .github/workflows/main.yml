@@ -3,26 +3,37 @@ name: NodeJS with Webpack
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+        - "**.md"
+
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+        - "**.md"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
     
     steps:
     - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: "16.13.2"
 
-    - name: Build
-      run: |
-        npm install
-        npx webpack
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build 🏗️
+          run: npm run build
+          env:
+            NODE_ENV: production
+    
+    - name: Deploy to GH Pages 🚀
+          if: ${{ github.event_name != 'pull_request' }}
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: dist
