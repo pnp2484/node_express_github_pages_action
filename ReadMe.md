@@ -16,7 +16,7 @@
     `"build": "webpack --mode production"`
 
 - Add index.html file
-- 
+- pull_request_template.md
 
    
  # References
